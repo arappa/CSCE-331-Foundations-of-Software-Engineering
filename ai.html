@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal and Fourier Transform Visualization</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Signal and Fourier Transform Visualization</h1>
+
+<canvas id="signalCanvas" width="800" height="200"></canvas>
+<canvas id="fourierCanvas" width="800" height="200"></canvas>
+
+<script>
+    // Function to generate a sample signal
+    function generateSignal() {
+        const frequency = 2; // Adjust frequency as needed
+        const amplitude = 50; // Adjust amplitude as needed
+        const signal = [];
+
+        for (let i = 0; i < 100; i++) {
+            const value = amplitude * Math.sin(2 * Math.PI * frequency * i / 100);
+            signal.push(value);
+        }
+
+        return signal;
+    }
+
+    // Function to calculate Fourier Transform
+    function calculateFourierTransform(signal) {
+        const N = signal.length;
+        const result = [];
+
+        for (let k = 0; k < N; k++) {
+            let real = 0;
+            let imaginary = 0;
+
+            for (let n = 0; n < N; n++) {
+                const angle = (2 * Math.PI * k * n) / N;
+                real += signal[n] * Math.cos(angle);
+                imaginary -= signal[n] * Math.sin(angle);
+            }
+
+            real /= N;
+            imaginary /= N;
+
+            const magnitude = Math.sqrt(real ** 2 + imaginary ** 2);
+            result.push(magnitude);
+        }
+
+        return result;
+    }
+
+    // Draw the signal
+    const signalCanvas = document.getElementById('signalCanvas');
+    const signalContext = signalCanvas.getContext('2d');
+    const signalData = generateSignal();
+
+    signalContext.beginPath();
+    signalContext.moveTo(0, signalCanvas.height / 2);
+
+    for (let i = 0; i < signalData.length; i++) {
+        signalContext.lineTo(i * (signalCanvas.width / signalData.length), (signalCanvas.height / 2) - signalData[i]);
+    }
+
+    signalContext.stroke();
+
+    // Draw the Fourier Transform
+    const fourierCanvas = document.getElementById('fourierCanvas');
+    const fourierContext = fourierCanvas.getContext('2d');
+    const fourierData = calculateFourierTransform(signalData);
+
+    fourierContext.beginPath();
+    fourierContext.moveTo(0, fourierCanvas.height / 2);
+
+    for (let i = 0; i < fourierData.length; i++) {
+        fourierContext.lineTo(i * (fourierCanvas.width / fourierData.length), (fourierCanvas.height / 2) - fourierData[i]);
+    }
+
+    fourierContext.stroke();
+</script>
+
+</body>
+</html>
