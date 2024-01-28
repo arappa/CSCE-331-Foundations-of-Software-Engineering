@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alexis Rappa - AI Generated Page</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <nav class="sidebar">
+      <div class="sidebar-header">
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio.html">Portfolio</a></li>
+        <li><a href="service.html">Service</a></li>
+        <li><a href="qualifications.html">Qualifications</a></li>
+        <li><a href="ai-generated.html">AI Generated Page</a></li>
+      </ul>
+    </nav>
+    <main class="content">
+      <h1>AI Generated Page</h1>
+      <div id="instructions">
+        <h2>How to Use:</h2>
+        <p>Select one of the pre-chosen signals from the dropdown menu below. Click the "Generate Plot" button to display the graph of the signal and its Fast Fourier Transform (FFT).</p>
+      </div>
+      <div id="signal-selection">
+        <label for="signal-select">Select Signal Function:</label>
+        <select id="signal-select">
+          <option value="sine">Sine</option>
+          <option value="cosine">Cosine</option>
+          <option value="sineAndCosine">Sine + Cosine</option>
+          <option value="sineTimesCosine">Sine * Cosine</option>
+          <option value="random">Random</option>
+        </select>
+        <button onclick="generatePlot()">Generate Plot</button>
+      </div>
+      <div id="plot-container">
+        <canvas id="signal-canvas" width="400" height="300"></canvas>
+        <canvas id="fft-canvas" width="400" height="300"></canvas>
+      </div>
+      <div id="prompt">
+        <h2>AI Prompt:</h2>
+        <p>Make me a page where i can input one of 5 pre-chosen signals that you pick and it shows the graph of the signal and the FFT of the signal. include a how to of how to use the page and the prompt i gave you. keep the sidebar the same and css as the other pages.</p>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
